@@ -39,23 +39,27 @@ export function App() {
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
 
   useEffect(() => {
-    api.get<GenreResponseProps[]>('genres').then(response => {
+    api.get<GenreResponseProps[]>('genres').then(response => { // busca na api os generos existente para exibir na side bar
+      //console.log(response, 'response')
       setGenres(response.data);
     });
   }, []);
 
-  useEffect(() => {
-    api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
+  useEffect(() => { 
+    api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => { //busca na api com base no id do genero, todos os filmes para esse genero selecionado (selectedGenreId)
+      //console.log(response, 'response')
       setMovies(response.data);
     });
 
-    api.get<GenreResponseProps>(`genres/${selectedGenreId}`).then(response => {
+    api.get<GenreResponseProps>(`genres/${selectedGenreId}`).then(response => { //busca na api com base no id do genero, o nome do genero do selecionado
+      console.log(response, 'response')
       setSelectedGenre(response.data);
     })
   }, [selectedGenreId]);
 
   function handleClickButton(id: number) {
     setSelectedGenreId(id);
+    //console.log(id, 'genero selecionado')
   }
 
   return (
