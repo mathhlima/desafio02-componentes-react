@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import MyContext from "../contexts/myContexts";
 import { api } from "../services/api";
 import { Button } from "./Button";
 
@@ -11,7 +12,7 @@ interface GenreResponseProps {
 export function SideBar() {
   // Complete aqui
 
-  const [selectedGenreId, setSelectedGenreId] = useState(1); // seta o genero do filme ma side bar, sempre começa no primeiro que é acao
+  const {selectedGenreId, setSelectedGenreId} = useContext(MyContext); // seta o genero do filme ma side bar, sempre começa no primeiro que é acao
 
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
 
@@ -28,7 +29,7 @@ export function SideBar() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+
       <nav className="sidebar">
         <span>Watch<p>Me</p></span>
 
@@ -43,9 +44,7 @@ export function SideBar() {
             />
           ))}
         </div>
-
       </nav>
-    </div>
   )
 
   

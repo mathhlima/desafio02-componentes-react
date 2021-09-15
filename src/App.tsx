@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { Button } from './components/Button';
 import { MovieCard } from './components/MovieCard';
 
-// import { SideBar } from './components/SideBar';
-// import { Content } from './components/Content';
 
 import { api } from './services/api';
 
@@ -14,6 +12,7 @@ import './styles/sidebar.scss';
 import './styles/content.scss';
 import { SideBar } from './components/SideBar';
 import { Content } from './components/Content';
+import MyContext from './contexts/myContexts'
 
 
 
@@ -21,23 +20,16 @@ import { Content } from './components/Content';
 
 export function App() {
   
-
- 
-
-
-
-
-
-  
-
-  
+  const [selectedGenreId, setSelectedGenreId] = useState(1);
 
   return (
     
-    <>
-    <SideBar />
-    <Content />
-    </>
+    <MyContext.Provider value={{selectedGenreId, setSelectedGenreId}}>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <SideBar />
+      <Content />
+      </div>
+    </MyContext.Provider>
      
   )
 }

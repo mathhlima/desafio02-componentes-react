@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import MyContext from "../contexts/myContexts";
 import { api } from "../services/api";
 import { MovieCard } from "./MovieCard";
 
@@ -22,14 +23,14 @@ interface GenreResponseProps {
 export function Content() {
   // Complete aqui
 
-  const [selectedGenreId, setSelectedGenreId] = useState([]);
+  const {selectedGenreId, setSelectedGenreId} = useContext(MyContext);
 
   const [movies, setMovies] = useState<MovieProps[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
 
   useEffect(() => { 
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => { //busca na api com base no id do genero, todos os filmes para esse genero selecionado (selectedGenreId)
-      //console.log(response, 'response')
+      console.log(response, 'response')
       setMovies(response.data);
     });
 
